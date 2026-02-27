@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/Vladyslav-Kondrenko/grpc.git/internal/app/products/handler"
+	"github.com/Vladyslav-Kondrenko/grpc.git/internal/app/products/storage"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
 	"github.com/joho/godotenv"
@@ -23,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer conn.Close(context.Background())
-
+	storage.InitDB(conn)
 	router := gin.Default()
 	router.POST("/products", handler.CreateProduct)
 	router.PUT("/products/:id", handler.UpdateProduct)

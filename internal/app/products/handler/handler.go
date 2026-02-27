@@ -1,9 +1,19 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/Vladyslav-Kondrenko/grpc.git/internal/app/products/storage"
+	"github.com/gin-gonic/gin"
+)
 
 func GetAllProducts(c *gin.Context) {
-	panic("GetAllProducts is not implemented")
+	products, err := storage.GetAllProducts(c.Request.Context())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, products)
 }
 
 func CreateProduct(c *gin.Context) {
