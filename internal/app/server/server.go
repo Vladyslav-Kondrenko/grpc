@@ -13,18 +13,18 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// Server реализует gRPC-сервис продуктов (Fetch, List).
+// Server implements the products gRPC service (Fetch, List).
 type Server struct {
 	products.UnimplementedProductServiceServer
 	coll *mongo.Collection
 }
 
-// New создаёт сервер с доступом к коллекции products в MongoDB.
+// New creates a server with access to the products collection in MongoDB.
 func New(coll *mongo.Collection) *Server {
 	return &Server{coll: coll}
 }
 
-// Fetch скачивает CSV по URL, парсит и создаёт/обновляет продукты в Mongo.
+// Fetch downloads CSV from URL, parses it and creates/updates products in Mongo.
 func (s *Server) Fetch(ctx context.Context, req *products.FetchRequest) (*products.FetchResponse, error) {
 	url := req.GetUrl()
 	if url == "" {
@@ -84,7 +84,7 @@ func (s *Server) Fetch(ctx context.Context, req *products.FetchRequest) (*produc
 	return &products.FetchResponse{Created: created, Updated: updated}, nil
 }
 
-// List возвращает продукты из Mongo с пагинацией и сортировкой.
+// List returns products from Mongo with pagination and sorting.
 func (s *Server) List(ctx context.Context, req *products.ListRequest) (*products.ListResponse, error) {
 	page := int32(1)
 	pageSize := int32(10)
