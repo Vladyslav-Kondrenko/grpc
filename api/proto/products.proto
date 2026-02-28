@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package products;
+
+option go_package = "github.com/Vladyslav-Kondrenko/grpc.git/api/proto/gen/go/products";
+
+// Сервис для работы с продуктами
+service ProductService {
+  rpc Fetch(FetchRequest) returns (FetchResponse);
+  rpc List(ListRequest) returns (ListResponse);
+}
+
+// --- Fetch ---
+message FetchRequest {
+  string url = 1;
+}
+
+message FetchResponse {
+  int32 created = 1;   // сколько создано
+  int32 updated = 2;   // сколько обновлено
+  string error = 3;    // если что-то пошло не так
+}
+
+// --- List ---
+message ListRequest {
+  PagingParams paging = 1;
+  SortingParams sorting = 2;
+}
+
+message PagingParams {
+  int32 page = 1;      // номер страницы (1-based)
+  int32 page_size = 2; // размер страницы
+}
+
+message SortingParams {
+  string field = 1;     // "name" или "price"
+  bool ascending = 2;   // true = по возрастанию
+}
+
+message ListResponse {
+  repeated Product products = 1;
+  int32 total = 2;     // общее количество (для пагинации)
+}
+
+message Product {
+  string id = 1;       // в MongoDB обычно string
+  string name = 2;
+  int32 price = 3;
+}
