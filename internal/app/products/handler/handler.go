@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"encoding/csv"
 	"net/http"
-
 	"strconv"
 
 	"github.com/Vladyslav-Kondrenko/grpc.git/internal/app/products/product"
@@ -11,12 +11,22 @@ import (
 )
 
 func GetAllProducts(c *gin.Context) {
+	writer := csv.NewWriter(c.Writer)
+	writer.Comma = ';'
+
 	products, err := storage.GetAllProducts(c.Request.Context())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, products)
+	c.Header("Content-Type", "text/csv; charset=utf-8")
+	c.Header("Content-Disposition", "attachment; filename=products.csv")
+	writer.Write([]string{"PRODUCT NAME", "PRICE"})
+	for _, p := range products {
+		writer.Write([]string{p.Name, strconv.Itoa(p.Price)})
+	}
+
+	writer.Flush()
 }
 
 func CreateProduct(c *gin.Context) {
