@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Сервис для работы с продуктами
+// Service for working with products
 type ProductServiceClient interface {
 	Fetch(ctx context.Context, in *FetchRequest, opts ...grpc.CallOption) (*FetchResponse, error)
 	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
@@ -65,7 +65,7 @@ func (c *productServiceClient) List(ctx context.Context, in *ListRequest, opts .
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
 //
-// Сервис для работы с продуктами
+// Service for working with products
 type ProductServiceServer interface {
 	Fetch(context.Context, *FetchRequest) (*FetchResponse, error)
 	List(context.Context, *ListRequest) (*ListResponse, error)

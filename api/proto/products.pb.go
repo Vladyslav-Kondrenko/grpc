@@ -68,9 +68,9 @@ func (x *FetchRequest) GetUrl() string {
 
 type FetchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Created       int32                  `protobuf:"varint,1,opt,name=created,proto3" json:"created,omitempty"` // сколько создано
-	Updated       int32                  `protobuf:"varint,2,opt,name=updated,proto3" json:"updated,omitempty"` // сколько обновлено
-	Error         string                 `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`      // если что-то пошло не так
+	Created       int32                  `protobuf:"varint,1,opt,name=created,proto3" json:"created,omitempty"` // number of created items
+	Updated       int32                  `protobuf:"varint,2,opt,name=updated,proto3" json:"updated,omitempty"` // number of updated items
+	Error         string                 `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`      // error message if something went wrong
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -181,8 +181,8 @@ func (x *ListRequest) GetSorting() *SortingParams {
 
 type PagingParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`                         // номер страницы (1-based)
-	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // размер страницы
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`                         // page number (1-based)
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // page size
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -233,8 +233,8 @@ func (x *PagingParams) GetPageSize() int32 {
 
 type SortingParams struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Field         string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`          // "name" или "price"
-	Ascending     bool                   `protobuf:"varint,2,opt,name=ascending,proto3" json:"ascending,omitempty"` // true = по возрастанию
+	Field         string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`          // "name" or "price"
+	Ascending     bool                   `protobuf:"varint,2,opt,name=ascending,proto3" json:"ascending,omitempty"` // true = ascending order
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -286,7 +286,7 @@ func (x *SortingParams) GetAscending() bool {
 type ListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Products      []*Product             `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"` // общее количество (для пагинации)
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"` // total count (for pagination)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -337,7 +337,7 @@ func (x *ListResponse) GetTotal() int32 {
 
 type Product struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // в MongoDB обычно string
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // in MongoDB typically string
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Price         int32                  `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
 	unknownFields protoimpl.UnknownFields

@@ -1,6 +1,6 @@
-# ТЗ для CSV сервиса (для практического проекта #2)
+# CSV Service Specification (for practical project #2)
 
-Реализовать REST API для хранения информации о продукции. Сущность "продукт" имеет следующий вид
+Implement a REST API for storing product information. The "product" entity has the following structure:
 
 ```go
 CREATE TABLE products (
@@ -10,14 +10,14 @@ CREATE TABLE products (
 )
 ```
 
-## Эндпоинты
+## Endpoints
 
-- **POST /products -** создание продукта
-- **PUT /products/:id -** апдейт продукта по айди
-- **DELETE /products/:id -** удаление продукта по айди
-- **GET /products -** получение CSV файла со списком всех продуктов
+- **POST /products -** create a product
+- **PUT /products/:id -** update a product by id
+- **DELETE /products/:id -** delete a product by id
+- **GET /products -** get a CSV file with the list of all products
 
-CSV файл должен выглядеть следующим образом
+The CSV file must have the following format:
 
 ```go
 PRODUCT NAME;PRICE

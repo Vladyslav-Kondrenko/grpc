@@ -4,7 +4,7 @@ package products;
 
 option go_package = "github.com/Vladyslav-Kondrenko/grpc.git/api/proto/gen/go/products";
 
-// Сервис для работы с продуктами
+// Service for working with products
 service ProductService {
   rpc Fetch(FetchRequest) returns (FetchResponse);
   rpc List(ListRequest) returns (ListResponse);
@@ -16,9 +16,9 @@ message FetchRequest {
 }
 
 message FetchResponse {
-  int32 created = 1;   // сколько создано
-  int32 updated = 2;   // сколько обновлено
-  string error = 3;    // если что-то пошло не так
+  int32 created = 1;   // number of created items
+  int32 updated = 2;   // number of updated items
+  string error = 3;    // error message if something went wrong
 }
 
 // --- List ---
@@ -28,22 +28,22 @@ message ListRequest {
 }
 
 message PagingParams {
-  int32 page = 1;      // номер страницы (1-based)
-  int32 page_size = 2; // размер страницы
+  int32 page = 1;      // page number (1-based)
+  int32 page_size = 2; // page size
 }
 
 message SortingParams {
-  string field = 1;     // "name" или "price"
-  bool ascending = 2;   // true = по возрастанию
+  string field = 1;     // "name" or "price"
+  bool ascending = 2;   // true = ascending order
 }
 
 message ListResponse {
   repeated Product products = 1;
-  int32 total = 2;     // общее количество (для пагинации)
+  int32 total = 2;     // total count (for pagination)
 }
 
 message Product {
-  string id = 1;       // в MongoDB обычно string
+  string id = 1;       // in MongoDB typically string
   string name = 2;
   int32 price = 3;
 }
