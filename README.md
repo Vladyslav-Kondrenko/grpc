@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="image.png" alt="Go gRPC Products Service" width="200" />
-</p>
-
-<p align="center">
   <b>Go gRPC Products Service</b> 🐹
 </p>
 
@@ -10,13 +6,26 @@
 
 ## Overview
 
-This project is a gRPC-based service for managing products backed by MongoDB.  
-It provides two main operations:
-
-- **Fetch**: download products from a CSV endpoint and upsert them into MongoDB.
-- **List**: read products from MongoDB with pagination and sorting.
-
-The service is implemented in Go and uses protocol buffers for API contracts.
+<table>
+  <tr>
+    <td valign="top">
+      <p>
+        This project is a gRPC-based service for managing products backed by MongoDB.
+        It provides two main operations:
+      </p>
+      <ul>
+        <li><b>Fetch</b>: download products from a CSV endpoint and upsert them into MongoDB.</li>
+        <li><b>List</b>: read products from MongoDB with pagination and sorting.</li>
+      </ul>
+      <p>
+        The service is implemented in Go and uses protocol buffers for API contracts.
+      </p>
+    </td>
+    <td align="right" valign="top" width="220">
+      <img src="image.png" alt="Go gRPC Products Service" width="200" />
+    </td>
+  </tr>
+</table>
 
 ## Architecture
 
